@@ -3,11 +3,19 @@ describe("Login Functionality", () => {
     // Visit the login page
     cy.visit("http://127.0.0.1:5500/index.html");
 
+    cy.wait(500);
+
+    // Waits for the register form to be visible
+
+    cy.get("#registerForm").should("be.visible");
+
     // Waits for the login button to appear and clicks it.
     cy.get('button[data-bs-target="#loginModal"]')
       .should("be.visible")
       .last()
       .click();
+
+    cy.wait(500);
 
     // Waits for the h5 with "Login" to appear, then types in the login credentials
     cy.get("h5[id=loginModalLabel]").should("be.visible");
