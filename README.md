@@ -61,6 +61,8 @@ npm run format
 
 [![Build and Deploy to GitHub Pages](https://github.com/Queenen/social-media-client/actions/workflows/deploy.yml/badge.svg)](https://github.com/Queenen/social-media-client/actions/workflows/deploy.yml)
 
+[![Unit Tests](https://github.com/Queenen/social-media-client/actions/workflows/unit-test.yml/badge.svg)](https://github.com/Queenen/social-media-client/actions/workflows/unit-test.yml)
+
 ## Testing
 
 Unit Testing
