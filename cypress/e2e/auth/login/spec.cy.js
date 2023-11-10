@@ -1,4 +1,5 @@
 describe("Login Functionality", () => {
+  /* SUCCESSFUL ATTEMPTS */
   it("successfully logs in and fetches the token", () => {
     // Visit the login page
     cy.visit("http://127.0.0.1:5500/index.html");
@@ -40,7 +41,6 @@ describe("Login Functionality", () => {
       expect(interception.response.statusCode).to.eq(200);
       expect(interception.response.body).to.have.property("accessToken");
     });
-
     // Assert the URL change after successful login
     cy.url().should(
       "eq",
@@ -53,4 +53,54 @@ describe("Login Functionality", () => {
       .invoke("getItem", "profile")
       .should("include", "thistestuser");
   });
+  /* FAILED ATTEMPTS */
+  it("login fails due to wrong email type and shows an error message", () => {
+    // Visit the login page
+    cy.visit("http://127.0.0.1:5500/index.html");
+
+    cy.wait(500);
+
+    // Open the login modal
+    cy.get('button[data-bs-target="#loginModal"]').last().click();
+
+    cy.wait(500);
+
+    // Type in invalid login credentials
+    cy.get("input[id=loginEmail]").type("wronguser@example.com");
+    cy.get("input[id=loginPassword]").type("wrongpassword");
+
+    // Submit the login form
+    cy.get('.modal-footer > button[type="submit"]').first().click();
+  });
+  //
+  it("fails to log in with invalid credentials and shows an error message", () => {
+    // Visit the login page
+    cy.visit("http://127.0.0.1:5500/index.html");
+
+    cy.wait(500);
+
+    // Open the login modal
+    cy.get('button[data-bs-target="#loginModal"]').last().click();
+
+    cy.wait(500);
+
+    // Intercept the POST request and alias it
+    cy.intercept(
+      "POST",
+      "https://nf-api.onrender.com/api/v1/social/auth/login"
+    ).as("loginRequest");
+
+    // Type in invalid login credentials
+    cy.get("input[id=loginEmail]").type("thistestuser@noroff.no");
+    cy.get("input[id=loginPassword]").type("wrongpassword");
+
+    // Submit the login form
+    cy.get('.modal-footer > button[type="submit"]').first().click();
+
+    // Wait for and verify the response from the login request
+    cy.wait("@loginRequest").then((interception) => {
+      expect(interception.response.statusCode).to.eq(401); // Asserting 401 Unauthorized
+    });
+  });
+  //
 });
