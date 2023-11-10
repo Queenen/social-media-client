@@ -4,12 +4,12 @@
   "description": "Test",
   "main": "index.js",
   "scripts": {
+    "test-unit": "jest --coverage",
     "build": "sass src/scss:dist/css",
     "start": "sass --watch src/scss:dist/css & live-server",
     "test": "npm run test-e2e-ci",
     "test-e2e": "cypress open",
-    "test-e2e-ci": "cypress run",
-    "test-unit": "jest --coverage"
+    "test-e2e-ci": "cypress run"
   },
   "keywords": [],
   "author": "Noroff",
