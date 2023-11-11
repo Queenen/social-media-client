@@ -26,7 +26,7 @@ Automatic e2e-testing which runs http-server and cypress in order to automate th
 To install this project, clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/yourusername/social-media-test.git
+git clone https://github.com/Queenen/social-media-client.git
 cd social-media-test
 npm install
 ```
