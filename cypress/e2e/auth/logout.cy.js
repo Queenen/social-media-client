@@ -56,6 +56,18 @@ describe("Logout Functionality", () => {
 
     cy.wait(500);
 
+    // Assert that the token is removed from local storage
+    cy.window()
+      .its("localStorage")
+      .invoke("getItem", "token")
+      .should("not.exist");
+
+    // Assert that the profile information is removed from local storage
+    cy.window()
+      .its("localStorage")
+      .invoke("getItem", "profile")
+      .should("not.exist");
+
     // Waits for the register form to be visible
     cy.get("#registerForm").should("be.visible");
   });
