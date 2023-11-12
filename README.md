@@ -65,10 +65,6 @@ npm run test-e2e-ci
 
 This will start a local server and run Cypress tests against it.
 
-## Contributing
-
-Contributions to this project are welcome. Please open a pull request or an issue to discuss proposed changes or report bugs.
-
 ## License
 
 This project is licensed under the ISC License - see the LICENSE file for details.
