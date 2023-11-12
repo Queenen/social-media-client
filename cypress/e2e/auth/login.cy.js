@@ -71,7 +71,16 @@ describe("Login Functionality", () => {
 
     // Submit the login form
     cy.get('.modal-footer > button[type="submit"]').first().click();
+
+    // Check if the email input field is marked as invalid
+    cy.get("input[id=loginEmail]").then(($input) => {
+      expect($input[0].validity.valid).to.be.false;
+      expect($input[0].validationMessage).to.eq(
+        "Please match the requested format."
+      );
+    });
   });
+
   //
   it("fails to log in with invalid credentials and shows an error message", () => {
     // Visit the login page
